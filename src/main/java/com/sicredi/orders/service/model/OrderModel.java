@@ -1,12 +1,13 @@
 package com.sicredi.orders.service.model;
 
-import com.sicredi.orders.repository.entity.OrderItemEntity;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
 public class OrderModel {
     private String orderCode;

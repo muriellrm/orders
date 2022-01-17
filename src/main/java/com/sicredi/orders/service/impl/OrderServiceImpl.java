@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Mono<OrderModel> save(OrderModel orderModel) {
         return Mono.just(orderModel)
-                .map(orderEntityConverter::mapFrom)
+                .map(orderEntityConverter::applyValues)
                 .flatMap(orderRepository::save)
                 .map(orderModelConverter::mapFrom);
     }

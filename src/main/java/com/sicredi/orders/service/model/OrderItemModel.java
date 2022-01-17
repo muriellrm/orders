@@ -1,10 +1,11 @@
 package com.sicredi.orders.service.model;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemModel {
 
     private String id;

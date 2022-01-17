@@ -1,5 +1,6 @@
 package com.sicredi.orders.repository.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Getter
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "orders")
 public class OrderEntity {
     @Id

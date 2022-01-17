@@ -1,9 +1,11 @@
 package com.sicredi.orders.repository.entity;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
 public class OrderItemEntity {
 
