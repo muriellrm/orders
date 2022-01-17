@@ -27,35 +27,20 @@ public class OrderEntityConverter {
     }
 
     private OrderItemEntity mapFromItem(OrderItemModel orderItemModel) {
-       var r = this.modelMapper.typeMap(OrderItemModel.class, OrderItemEntity.class)
-                .addMapping(src -> src.getUnityPrice() * src.getQuantity(), (dest,v) -> {
-                    dest.setTotal((Double) v);
-                })
-               .map(orderItemModel);
-
-        return OrderItemEntity.builder()
-                .id(orderItemModel.getId())
-                .unityPrice(orderItemModel.getUnityPrice())
-                .quantity(orderItemModel.getQuantity())
-                .total(orderItemModel.getUnityPrice() * orderItemModel.getQuantity()).build();
+        return modelMapper.map(orderItemModel,OrderItemEntity.class)
+                .toBuilder()
+                .total(orderItemModel.getUnityPrice() * orderItemModel.getQuantity())
+                .build();
 
     }
     public OrderEntity applyValues(OrderModel orderModel) {
-        return applyValues(OrderEntity
-                        .builder()
-                        .build(),
-                orderModel);
+        return applyValues(new OrderEntity(),orderModel);
     }
     public OrderEntity applyValues(OrderEntity orderEntity, OrderModel orderModel) {
-
-
-
-
         var items = mapFromItems(orderModel.getItems());
         var totalPrice = items.stream().reduce(0.0 ,(acc, value)-> acc + value.getTotal(), Double::sum);
-
+        modelMapper.map(orderModel,orderEntity);
         return orderEntity.toBuilder()
-                .orderCode(orderModel.getOrderCode())
                 .items(items)
                 .totalPrice(totalPrice)
                 .build();
